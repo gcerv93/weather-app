@@ -27,6 +27,13 @@ const generateTempData = (obj) => {
   return { res, symbol };
 };
 
+const clearMainIcon = () => {
+  const iconDiv = document.querySelector(".main-icon");
+  if (iconDiv) {
+    iconDiv.remove();
+  }
+};
+
 const convertWindSpeed = (obj) => {
   let { speed } = obj.wind;
   speed *= 2.2369;
@@ -35,6 +42,7 @@ const convertWindSpeed = (obj) => {
 };
 
 const displayIcon = (obj) => {
+  clearMainIcon();
   const topDiv = document.querySelector(".topDiv");
   const iconDiv = document.createElement("i");
 

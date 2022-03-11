@@ -43,8 +43,9 @@ getLocationInfo("Houston").then((result) => {
     const searchInput = document.querySelector("#search");
     const searchValue = searchInput.value;
     getLocationInfo(searchValue).then((result) => {
-      console.log(processData(result));
-      // fillTempValues(processData(result));
+      const data = processData(result);
+      data.fahr = true;
+      displayInfo(data);
     });
   });
 })();
