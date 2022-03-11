@@ -2,11 +2,13 @@ import "./styles/styles.css";
 import "./styles/weather-icons.css";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
+import displayInfo from "./DOMstuff";
 
 function processData(obj) {
   const { name } = obj;
   const { temp } = obj.main;
   const { humidity } = obj.main;
+  const feelsLike = obj.main.feels_like;
   const wind = { speed: obj.wind.speed, degrees: obj.wind.deg };
   const weather = {
     id: obj.weather[0].id,
@@ -14,7 +16,7 @@ function processData(obj) {
     description: obj.weather[0].description,
   };
 
-  return { name, temp, humidity, wind, weather };
+  return { name, temp, feelsLike, humidity, wind, weather };
 }
 
 async function getLocationInfo(location) {
@@ -23,13 +25,15 @@ async function getLocationInfo(location) {
     { mode: "cors" }
   );
 
-  const result = response.json().then((res) => console.log(res));
+  const result = response.json().then((res) => res);
 
   return result;
 }
 
 getLocationInfo("Houston").then((result) => {
-  console.log(processData(result));
+  const data = processData(result);
+  data.fahr = true;
+  displayInfo(data);
 });
 
 (() => {
@@ -40,6 +44,7 @@ getLocationInfo("Houston").then((result) => {
     const searchValue = searchInput.value;
     getLocationInfo(searchValue).then((result) => {
       console.log(processData(result));
+      // fillTempValues(processData(result));
     });
   });
 })();
