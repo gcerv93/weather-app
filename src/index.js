@@ -22,7 +22,7 @@ async function getLocationInfo(location) {
     { mode: "cors" }
   );
 
-  const result = response.json().then((res) => res);
+  const result = response.json().then((res) => console.log(res));
 
   return result;
 }
