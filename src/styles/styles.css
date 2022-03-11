@@ -44,7 +44,34 @@ h1 {
   padding-top: 20px;
 }
 
-i {
-  padding-top: 50px;
+.main-icon {
+  padding-top: 60px;
   font-size: 100px
+}
+
+.topDiv {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.temp {
+  padding-top: 30px;
+  display: flex;
+}
+
+.tempNum {
+  font-size: 100px;
+}
+
+.tempSymbols {
+  padding-top: 20px;
+  font-weight: bold;
+}
+
+.description {
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
 }
