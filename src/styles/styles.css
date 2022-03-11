@@ -43,3 +43,8 @@ body, html {
 h1 {
   padding-top: 20px;
 }
+
+i {
+  padding-top: 50px;
+  font-size: 100px
+}

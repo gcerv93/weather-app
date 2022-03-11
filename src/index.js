@@ -1,4 +1,5 @@
-import "./styles.css";
+import "./styles/styles.css";
+import "./styles/weather-icons.css";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
