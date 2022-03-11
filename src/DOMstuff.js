@@ -71,15 +71,19 @@ const displayDescription = (obj) => {
   descriptionDiv.textContent = obj.weather.description;
 };
 
-const displayBottomInfo = (obj) => {
+const feelsLikeInfo = (obj) => {
   const feelsLikeDiv = document.querySelector(".feelsLikeValue");
+  const tempData = generateTempData(obj);
+  feelsLikeDiv.textContent = `${tempData.res}${tempData.symbol}`;
+};
+
+const displayBottomInfo = (obj) => {
   const humidityDiv = document.querySelector(".humidityValue");
   const windSpeedDiv = document.querySelector(".windValue");
 
-  const tempData = generateTempData(obj);
-  feelsLikeDiv.textContent = `${tempData.res}${tempData.symbol}`;
   humidityDiv.textContent = `${obj.humidity}%`;
   windSpeedDiv.textContent = `${convertWindSpeed(obj)}mph`;
+  feelsLikeInfo(obj);
 };
 
 const displayInfo = (obj) => {
@@ -90,4 +94,16 @@ const displayInfo = (obj) => {
   displayIcon(obj);
 };
 
-export default displayInfo;
+const changeTempSymbol = (obj) => {
+  if (obj.fahr === true) {
+    // eslint-disable-next-line no-param-reassign
+    obj.fahr = false;
+  } else if (obj.fahr === false) {
+    // eslint-disable-next-line no-param-reassign
+    obj.fahr = true;
+  }
+  displayTempValues(obj);
+  feelsLikeInfo(obj);
+};
+
+export { displayInfo, changeTempSymbol };

@@ -2,7 +2,7 @@ import "./styles/styles.css";
 import "./styles/weather-icons.css";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
-import displayInfo from "./DOMstuff";
+import { displayInfo, changeTempSymbol } from "./DOMstuff";
 
 function processData(obj) {
   const { name } = obj;
@@ -30,22 +30,29 @@ async function getLocationInfo(location) {
   return result;
 }
 
-getLocationInfo("Houston").then((result) => {
-  const data = processData(result);
-  data.fahr = true;
-  displayInfo(data);
-});
-
 (() => {
+  let data;
+
+  getLocationInfo("Houston").then((result) => {
+    data = processData(result);
+    data.fahr = true;
+    displayInfo(data);
+  });
+
   const searchForm = document.querySelector("#searchForm");
   searchForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const searchInput = document.querySelector("#search");
     const searchValue = searchInput.value;
     getLocationInfo(searchValue).then((result) => {
-      const data = processData(result);
+      data = processData(result);
       data.fahr = true;
       displayInfo(data);
     });
+  });
+
+  const tempSymbol = document.querySelector(".tempSymbols");
+  tempSymbol.addEventListener("click", () => {
+    changeTempSymbol(data);
   });
 })();
