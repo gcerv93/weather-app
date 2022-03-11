@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +9,7 @@
 body, html {
   height: 100%;
   width: 100%;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .wrapper {
@@ -43,11 +47,11 @@ body, html {
 }
 
 h1 {
-  padding-top: 20px;
+  padding-top: 50px;
 }
 
 .main-icon {
-  padding-top: 50px;
+  padding-top: 30px;
   font-size: 100px
 }
 
@@ -55,6 +59,7 @@ h1 {
   width: 100%;
   display: flex;
   justify-content: space-around;
+  padding-top: 60px;
 }
 
 .temp {
@@ -70,7 +75,6 @@ h1 {
 
 .tempSymbols {
   cursor: pointer;
-  padding-top: 20px;
   font-weight: bold;
 }
 
