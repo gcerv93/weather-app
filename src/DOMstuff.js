@@ -12,7 +12,9 @@ const kelvinToCelsius = (kelv) => {
   return Math.round(temp);
 };
 
+// im checking the fahr attribute of data object to see what temperature format to display
 const generateTempData = (obj) => {
+  // if i don't initialize these here, I will start to get errors with eslint
   let res;
   let symbol;
 
@@ -27,6 +29,8 @@ const generateTempData = (obj) => {
   return { res, symbol };
 };
 
+// remove the main-icon element on every page load, otherwise the page will
+// fill with icons
 const clearMainIcon = () => {
   const iconDiv = document.querySelector(".main-icon");
   if (iconDiv) {
@@ -34,6 +38,7 @@ const clearMainIcon = () => {
   }
 };
 
+// change wind speed from m/s to mph
 const convertWindSpeed = (obj) => {
   let { speed } = obj.wind;
   speed *= 2.2369;
@@ -41,17 +46,20 @@ const convertWindSpeed = (obj) => {
   return Math.round(speed);
 };
 
-const displayIcon = (obj) => {
+// clear main icon then display a new icon using weather-icons package by erikflowers https://github.com/erikflowers/weather-icons
+// using the weather id's to find the right class for the icons
+const displayIcon = (id) => {
   clearMainIcon();
   const topDiv = document.querySelector(".topDiv");
   const iconDiv = document.createElement("i");
 
   iconDiv.classList.add("wi");
-  iconDiv.classList.add(`wi-owm-${obj.weather.id}`);
+  iconDiv.classList.add(`wi-owm-${id}`);
   iconDiv.classList.add("main-icon");
   topDiv.appendChild(iconDiv);
 };
 
+// temp values have 2 divs, temp and temp symbols
 const displayTempValues = (obj) => {
   const tempDiv = document.querySelector(".tempNum");
   const tempSymbolDiv = document.querySelector(".tempSymbols");
@@ -61,14 +69,14 @@ const displayTempValues = (obj) => {
   tempSymbolDiv.textContent = tempNumData.symbol;
 };
 
-const displayLocationName = (obj) => {
+const displayLocationName = (cityName) => {
   const nameDiv = document.querySelector(".cityName");
-  nameDiv.textContent = obj.name;
+  nameDiv.textContent = cityName;
 };
 
-const displayDescription = (obj) => {
+const displayDescription = (description) => {
   const descriptionDiv = document.querySelector(".description");
-  descriptionDiv.textContent = obj.weather.description;
+  descriptionDiv.textContent = description;
 };
 
 const feelsLikeInfo = (obj) => {
@@ -86,14 +94,17 @@ const displayBottomInfo = (obj) => {
   feelsLikeInfo(obj);
 };
 
+// one single function to display all data, easier to call in index.js
 const displayInfo = (obj) => {
-  displayDescription(obj);
+  displayDescription(obj.weather.description);
   displayTempValues(obj);
-  displayLocationName(obj);
+  displayLocationName(obj.name);
   displayBottomInfo(obj);
-  displayIcon(obj);
+  displayIcon(obj.weather.id);
 };
 
+// function attached to symbol div listener, changes object fahr value and displays
+// those particular divs again
 const changeTempSymbol = (obj) => {
   if (obj.fahr === true) {
     // eslint-disable-next-line no-param-reassign
